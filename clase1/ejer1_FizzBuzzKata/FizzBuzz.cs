@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ejer1 {
+namespace ejer1_FizzbuzzKata
+{
     public class FizzBuzz {
 
         private Dictionary<int, string> _dic;

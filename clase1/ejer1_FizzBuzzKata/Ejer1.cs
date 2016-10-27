@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ejer1 {
-    public class Ejer1 {
+namespace ejer1_FizzbuzzKata {
+    public class Ejercicio1 {
 
         private int _count = 0;
         private Dictionary<int, string> _dic;
 
-        public Ejer1(int count, Dictionary<int, string> numeros) {
+        public Ejercicio1(int count, Dictionary<int, string> numeros) {
             _count = count;
             _dic = numeros;
         }

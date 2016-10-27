@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejer1", "ejer1\ejer1.csproj", "{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejer1_FizzBuzzKata", "ejer1_FizzBuzzKata\ejer1_FizzBuzzKata.csproj", "{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejercio2", "ejercio2\ejercio2.csproj", "{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejer2_DictionaryReplacerKata", "ejer2_DictionaryReplacerKata\ejer2_DictionaryReplacerKata.csproj", "{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

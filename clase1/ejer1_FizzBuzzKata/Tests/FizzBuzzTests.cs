@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace ejer1.Tests {
+namespace ejer1_FizzbuzzKata.Tests {
 
     [TestFixture]
     public class FizzBuzzTests {

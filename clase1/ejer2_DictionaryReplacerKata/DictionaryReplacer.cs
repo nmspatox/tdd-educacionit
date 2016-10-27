@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ejercio2 {
+namespace ejer2_DictionaryReplacerKata {
     public class DictionaryReplacer {
 
         public string Replace(string text, Dictionary <string ,string> dic) {
@@ -19,6 +19,5 @@ namespace ejercio2 {
 
             return result;
         }
-
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace ejercio2.Tests {
+namespace ejer2_DictionaryReplacerKata.Tests {
     [TestFixture]
     public class DictionaryReplacerTests {
              

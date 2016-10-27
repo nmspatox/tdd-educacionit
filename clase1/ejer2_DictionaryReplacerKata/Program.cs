@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ejercio2 {
+namespace ejer2_DictionaryReplacerKata
+{
     class Program {
         static void Main(string[] args) {
         }
