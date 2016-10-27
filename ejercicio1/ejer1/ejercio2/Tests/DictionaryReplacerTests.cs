@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace ejercio2.Tests {
     [TestFixture]
     public class DictionaryReplacerTests {
-
+             
         [Test]
         public void EsNulo() {
             Dictionary<string, string> dic = null;
