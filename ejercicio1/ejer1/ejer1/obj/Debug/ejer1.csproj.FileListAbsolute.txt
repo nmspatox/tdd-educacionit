@@ -1,0 +1,8 @@
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\bin\Debug\ejer1.exe.config
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\bin\Debug\ejer1.exe
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\bin\Debug\ejer1.pdb
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\obj\Debug\ejer1.csprojResolveAssemblyReference.cache
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\obj\Debug\ejer1.exe
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\obj\Debug\ejer1.pdb
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\bin\Debug\nunit.framework.dll
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\ejer1\bin\Debug\nunit.framework.xml

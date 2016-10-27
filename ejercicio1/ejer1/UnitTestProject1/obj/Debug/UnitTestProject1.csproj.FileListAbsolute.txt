@@ -1,0 +1,6 @@
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\UnitTestProject1\bin\Debug\UnitTestProject1.dll
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\UnitTestProject1\obj\Debug\UnitTestProject1.csprojResolveAssemblyReference.cache
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\UnitTestProject1\obj\Debug\UnitTestProject1.dll
+E:\Curso\tdd-educacionit\ejercicio1\ejer1\UnitTestProject1\obj\Debug\UnitTestProject1.pdb

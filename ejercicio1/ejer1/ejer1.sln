@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejer1", "ejer1\ejer1.csproj", "{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ejercio2", "ejercio2\ejercio2.csproj", "{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C3F83B-4EE8-462A-95E6-A7E2F42F7B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E198C78-94C1-4AB8-AD77-DA9704E0D0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
