@@ -1,5 +1,5 @@
 function DictionaryReplacer(){
-	this.replace = function(text, dic){
+	this.replace = (text, dic)=>{
 		let result = '';
 
 		if (dic && Object.keys(dic).length){

@@ -4,19 +4,19 @@ namespace PacManKata
 {
     public class Maze
     {
-        private class PacmanPosition
+        private class PacManPosition
         {
             public int Row { get; set; }
             public int Column { get; set; }
 
-            public PacmanPosition(int row, int column)
+            public PacManPosition(int row, int column)
             {
                 this.Row = row;
                 this.Column = column;
             }
         }
 
-        private enum PacmanDirections
+        private enum PacManDirections
         {
             Up = 1,
             Right,
@@ -27,8 +27,8 @@ namespace PacManKata
         private int rows;
         private int columns;
 
-        private PacmanPosition pacmanPosition;
-        private PacmanDirections pacmanDirection;        
+        private PacManPosition pacManPosition;
+        private PacManDirections pacManDirection;        
 
         public Maze(int rows, int columns)
         {
@@ -37,8 +37,8 @@ namespace PacManKata
 
             int middleRow = this.rows % 2 == 0? this.rows / 2 : (this.rows + 1) / 2;
             int middleColumn = this.columns % 2 == 0? this.columns / 2 : (this.columns+ 1) / 2;
-            this.pacmanPosition = new PacmanPosition(middleRow, middleColumn);
-            this.pacmanDirection = PacmanDirections.Up;
+            this.pacManPosition = new PacManPosition(middleRow, middleColumn);
+            this.pacManDirection = PacManDirections.Up;
         }
 
         public int Rows { get { return rows; } }
@@ -46,27 +46,27 @@ namespace PacManKata
 
         public bool IsPacManAt(int row, int column)
         {
-            return pacmanPosition.Row == row && pacmanPosition.Column == column;
+            return pacManPosition.Row == row && pacManPosition.Column == column;
         }
 
         public bool IsPacManLookingDown()
         {
-            return pacmanDirection == PacmanDirections.Down;
+            return pacManDirection == PacManDirections.Down;
         }
 
         public bool IsPacManLookingUp()
         {
-            return pacmanDirection == PacmanDirections.Up;
+            return pacManDirection == PacManDirections.Up;
         }
 
         public bool IsPacManLookingLeft()
         {
-            return pacmanDirection == PacmanDirections.Left;
+            return pacManDirection == PacManDirections.Left;
         }
 
         public bool IsPacManLookingRight()
         {
-            return pacmanDirection == PacmanDirections.Right;
+            return pacManDirection == PacManDirections.Right;
         }
 
         public bool IsEmptyAt(int row, int column)
@@ -76,42 +76,42 @@ namespace PacManKata
 
         public void PacManDown()
         {
-            pacmanDirection = PacmanDirections.Down;
+            pacManDirection = PacManDirections.Down;
         }
 
         public void PacManUp()
         {
-            pacmanDirection = PacmanDirections.Up;
+            pacManDirection = PacManDirections.Up;
         }
 
         public void PacManLeft()
         {
-            pacmanDirection = PacmanDirections.Left;
+            pacManDirection = PacManDirections.Left;
         }
 
         public void PacManRight()
         {
-            pacmanDirection = PacmanDirections.Right;
+            pacManDirection = PacManDirections.Right;
         }
 
         public void Tick()
         {
-            switch (pacmanDirection)
+            switch (pacManDirection)
             {
-                case PacmanDirections.Up:
-                    pacmanPosition.Row--;
+                case PacManDirections.Up:
+                    pacManPosition.Row--;
                     ValidateRowPosition();
                     break;
-                case PacmanDirections.Down:
-                    pacmanPosition.Row++;
+                case PacManDirections.Down:
+                    pacManPosition.Row++;
                     ValidateRowPosition();
                     break;
-                case PacmanDirections.Right:
-                    pacmanPosition.Column++;
+                case PacManDirections.Right:
+                    pacManPosition.Column++;
                     ValidateColumnPosition();
                     break;                
-                case PacmanDirections.Left:
-                    pacmanPosition.Column--;
+                case PacManDirections.Left:
+                    pacManPosition.Column--;
                     ValidateColumnPosition();
                     break;
             }
@@ -119,25 +119,25 @@ namespace PacManKata
 
         private void ValidateRowPosition()
         {
-            if (pacmanPosition.Row > this.rows)
+            if (pacManPosition.Row > this.rows)
             {
-                pacmanPosition.Row = 1;
+                pacManPosition.Row = 1;
             }
-            else if (pacmanPosition.Row < 1)
+            else if (pacManPosition.Row < 1)
             {
-                pacmanPosition.Row = this.rows;
+                pacManPosition.Row = this.rows;
             }
         }
 
         private void ValidateColumnPosition()
         {
-            if (pacmanPosition.Column > this.columns)
+            if (pacManPosition.Column > this.columns)
             {
-                pacmanPosition.Column = 1;
+                pacManPosition.Column = 1;
             }
-            else if (pacmanPosition.Column < 1)
+            else if (pacManPosition.Column < 1)
             {
-                pacmanPosition.Column = this.columns;
+                pacManPosition.Column = this.columns;
             }
         }
 

@@ -1,8 +1,8 @@
 function FizzBuzz(){
 	// associative array to emulate dictionary
-	var dic = { '3': 'Fizz', '5': 'Buzz'};
+	let dic = { '3': 'Fizz', '5': 'Buzz'};
 
-	this.get = function(i){
+	this.get = i => {
 		let result = '';
 
 		for(let key in dic){						
