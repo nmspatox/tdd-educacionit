@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="CalculadoraNormalHsTrabajo.cs" />
     <Compile Include="Calendario.cs" />
-    <Compile Include="CalendarioSinDiasException.cs" />
+    <Compile Include="Excepciones\CalendarioSinDiasException.cs" />
     <Compile Include="DiaFeriado.cs" />
     <Compile Include="CalculadoraHsTrabajo.cs" />
     <Compile Include="Feriado.cs" />
