@@ -44,7 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculadoraNormalHsTrabajo.cs" />
     <Compile Include="Calendario.cs" />
+    <Compile Include="CalendarioSinDiasException.cs" />
+    <Compile Include="DiaFeriado.cs" />
+    <Compile Include="CalculadoraHsTrabajo.cs" />
+    <Compile Include="Feriado.cs" />
     <Compile Include="DiaInfo.cs" />
     <Compile Include="Excepciones\DiaNoValidoException.cs" />
     <Compile Include="Excepciones\DiaYaCargadoException.cs" />

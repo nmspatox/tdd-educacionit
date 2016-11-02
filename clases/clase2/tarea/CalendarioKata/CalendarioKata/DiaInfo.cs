@@ -11,6 +11,10 @@ namespace CalendarioKata
         public int DiaDeLaSemana { get; set; }
         public int HsDeTrabajo { get; set; }
 
+        public DiaInfo(DayOfWeek dia, int hsDeTrabajo): this((int)dia, hsDeTrabajo)
+        {
+        }
+
         public DiaInfo(int dia, int hsDeTrabajo)
         {
             DiaDeLaSemana = dia;
