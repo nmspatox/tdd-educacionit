@@ -76,7 +76,6 @@ namespace ejer1_StringDictionary
             bool doContinue = true;
             int i = 0;
 
-            //for (int i = 0; i < delimiters.Length; i++)
             while(doContinue && i < delimiters.Length)
             {
                 // Chequeamos que el string tenga el delimitador

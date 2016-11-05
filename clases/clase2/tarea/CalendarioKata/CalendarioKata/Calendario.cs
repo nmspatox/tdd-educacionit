@@ -10,11 +10,13 @@ namespace CalendarioKata
     {
         #region Fields y Properties
 
-        private DiaInfo[] _diasSemana;
+        private Dictionary<int, DiaInfo> _diasLaborales;
+
+        public Dictionary<int, DiaInfo> DiasLaborales { get; private set; }
 
         public int DiasCargados {
             get {
-                return _diasSemana.Count(x => x != null);
+                return _diasLaborales.Count();
             }
         }
 
@@ -26,36 +28,37 @@ namespace CalendarioKata
 
         #region Constructor
 
-        public Calendario():this(new CalculadoraNormalHsTrabajo())
-        {
-
-        }
-
-        public Calendario(CalculadoraHsTrabajo calculadoraHs)
-        {
-            _diasSemana = new DiaInfo[7];
-            Feriados = new List<Feriado>();
-
-            CalculadoraHs = calculadoraHs;
-
-            for(int i=0; i < 7; i++)
+        public Calendario(IEnumerable<DiaInfo> diasLaborales, CalculadoraHsTrabajo calculadoraHs = null)
+        {            
+            if (diasLaborales.Count() == 0)
             {
-                _diasSemana[i] = null;
+                throw new CalendarioSinDiasException();
             }
+
+            if (diasLaborales.Any(x=> x == null))
+            {
+                throw new CalendarioConDiasNoValidosException();
+            }
+
+            _diasLaborales = new Dictionary<int, DiaInfo>();
+            foreach(var dia in diasLaborales)
+            {                
+                ValidarSiYaExiste(dia.DiaDeLaSemana);
+                ValidarDiaDeLaSemana(dia.DiaDeLaSemana);
+                ValidarHsDeTrabajo(dia.HsDeTrabajo);
+
+                _diasLaborales.Add(dia.DiaDeLaSemana, dia);
+            }
+
+            DiasLaborales = _diasLaborales;
+
+            Feriados = new List<Feriado>();
+            CalculadoraHs = calculadoraHs ?? new CalculadoraNormalHsTrabajo();            
         }
 
         #endregion
 
         #region Metodos Publicos
-
-        public void CargarDia(DiaInfo dia)
-        {
-            ValidarSiYaExiste(dia.DiaDeLaSemana);
-            ValidarDiaDeLaSemana(dia.DiaDeLaSemana);
-            ValidarHsDeTrabajo(dia.HsDeTrabajo);
-
-            _diasSemana[dia.DiaDeLaSemana] = dia;
-        }
 
         public bool EsDiaLaboral(DateTime fecha)
         {
@@ -71,16 +74,19 @@ namespace CalendarioKata
         public DiaInfo GetDia(int diaDeLaSemana)
         {
             ValidarDiaDeLaSemana(diaDeLaSemana);
-
-            return _diasSemana[diaDeLaSemana];
-        }
+            DiaInfo result = null;
+            _diasLaborales.TryGetValue(diaDeLaSemana, out result);
+            return result;
+        }        
 
         public bool EsDiaFeriado(DateTime fecha)
         {
             foreach(var feriado in Feriados)
             {
                 if (feriado.EsDiaFeriado(fecha))
+                {
                     return true;
+                }
             }
 
             return false;
@@ -92,7 +98,7 @@ namespace CalendarioKata
 
         private DiaInfo GetDia(DateTime fecha)
         {            
-            return _diasSemana.SingleOrDefault(x => x.DiaDeLaSemana == (int)fecha.DayOfWeek);
+            return GetDia((int)fecha.DayOfWeek);
         }
 
         private void ValidarSiYaExiste(int diaDeLaSemana)

@@ -10,14 +10,17 @@ namespace CalendarioKata
     [TestFixture]
     public class Tests
     {
+        #region Tests
+
         [Test]
         public void SeCarganDiaLaboralesValidosOk()
         {
             // Arrange
-            var cal = new Calendario();
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = null;
 
             // Act     
-            CargarDiasLunesAViernes8hs(cal);                   
+            cal = new Calendario(dias);
 
             // Assert
             Assert.AreEqual(7, cal.DiasCargados);
@@ -27,25 +30,42 @@ namespace CalendarioKata
         public void SeCargaDiaLaboralNoValidoLanzaDiaNoValidoException()
         {
             // Arrange
-            var cal = new Calendario();
+            var dias = new List<DiaInfo>() { new DiaInfo(12, 4) };
+            Calendario cal = null;
 
             // Act            
-            Exception ex =  Assert.Catch(() => cal.CargarDia(new DiaInfo(12, 4)));
-            
+            Exception ex = Assert.Catch(() => cal = new Calendario(dias) );
+
             // Assert
             Assert.IsInstanceOf<DiaNoValidoException>(ex);
+        }
+
+        [Test]
+        public void SeCarganDiasRepetidosLanzaDiaYaCargadoException()
+        {
+            // Arrange
+            var dias = GenerarDiasLunesAViernes8hs();
+            dias.Add(new DiaInfo((int)DayOfWeek.Monday, 6));
+            Calendario cal = null;
+
+            // Act            
+            Exception ex = Assert.Catch(() => cal = new Calendario(dias));
+
+            // Assert
+            Assert.IsInstanceOf<DiaYaCargadoException>(ex);
         }
 
         [Test]
         public void SeCargaDiaConHsValidasOk()
         {
             // Arrange
-            var cal = new Calendario();
             var diaDeLaSemana = 2;
             var hsDeTrabajo = 8;
+            var dias = new List<DiaInfo>() { new DiaInfo(diaDeLaSemana, hsDeTrabajo) };
+            Calendario cal = null;
 
-            // Act            
-            cal.CargarDia(new DiaInfo(diaDeLaSemana, hsDeTrabajo));
+            // Act           
+            cal = new Calendario(dias);
 
             // Assert
             Assert.AreEqual(hsDeTrabajo, cal.GetDia(diaDeLaSemana).HsDeTrabajo);
@@ -55,89 +75,91 @@ namespace CalendarioKata
         public void SeCargaDiaCon25HsDeTrabajoLanzaHsDeTrabajoNoValidasException()
         {
             // Arrange
-            var cal = new Calendario();
             var diaDeLaSemana = 2;
             var hsDeTrabajo = 25;
+            var dias = new List<DiaInfo>() { new DiaInfo(diaDeLaSemana, hsDeTrabajo) };
+            Calendario cal = null;
 
             // Act            
-            Exception ex = Assert.Catch(() => cal.CargarDia(new DiaInfo(diaDeLaSemana, hsDeTrabajo)));
+            Exception ex = Assert.Catch(() => cal = new Calendario(dias));
 
             // Assert
             Assert.IsInstanceOf<HsDeTrabajoNoValidasException>(ex);
         }
 
         [Test]
-        public void SeCarganDiasDeLunesAViernesY1deJulio2013EsDiaLaboral()
+        public void SeCarganDiasValidosYLunesEsDiaLaboral()
         {
             // Arrange
-            var cal = new Calendario();
-            var fecha = new DateTime(2013, 7, 1);
+            var dias = GenerarDiasLunesAViernes8hs();
+            var fecha = new DateTime(2013, 7, 1); // Lunes
+            Calendario cal = null;
 
             // Act            
-            CargarDiasLunesAViernes8hs(cal);
+            cal = new Calendario(dias);
 
             // Assert
             Assert.IsTrue(cal.EsDiaLaboral(fecha));
         }
 
         [Test]
-        public void SeCarganDiasDeLunesAViernesY6deJulio2013NoEsDiaLaboral()
+        public void SeCarganDiasValidosYSabadoNoEsDiaLaboral()
         {
             // Arrange
-            var cal = new Calendario();
-            var fecha = new DateTime(2013, 7, 6);
+            var dias = GenerarDiasLunesAViernes8hs();
+            var fecha = new DateTime(2013, 7, 6); // Sabado
+            Calendario cal = null;
 
             // Act            
-            CargarDiasLunesAViernes8hs(cal);
+            cal = new Calendario(dias);
 
             // Assert
             Assert.IsFalse(cal.EsDiaLaboral(fecha));
         }
 
         [Test]
-        public void SeCarganDiasDeLunesAViernes8hsY1deJulio2013SeTrabaja8Hs()
+        public void SeCarganDiasValidosYLunesSeTrabaja8Hs()
         {
             // Arrange
-            var cal = new Calendario();
-            var fecha = new DateTime(2013, 7, 1);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = null;
+            var fecha = new DateTime(2013, 7, 1); // Lunes
 
             // Act            
-            CargarDiasLunesAViernes8hs(cal);
+            cal = new Calendario(dias);
 
             // Assert
             Assert.AreEqual(8, cal.HsDeTrabajo(fecha));
         }
 
         [Test]
-        public void SeCarganDiasDeLunesAViernes8hsY6deJulio2013SeTrabaja0Hs()
+        public void SeCarganDiasValidosYSabadoSeTrabaja0Hs()
         {
             // Arrange
-            var cal = new Calendario();
-            var fecha = new DateTime(2013, 7, 6);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = null;
+            var fecha = new DateTime(2013, 7, 6); // Sabado
 
             // Act            
-            CargarDiasLunesAViernes8hs(cal);
+            cal = new Calendario(dias);
 
             // Assert
             Assert.AreEqual(0, cal.HsDeTrabajo(fecha));
         }
 
         [Test]
-        public void SeCarganDiasViernes6hsY5deJulio2013SeTrabaja6hs()
+        public void SeCargaDiasCon8hsYViernesCon6hs()
         {
             // Arrange
-            var cal = new Calendario();
+            var dias = GenerarDiasLunesAViernes8hs();
+            dias.Single(x => x.DiaDeLaSemana == (int)DayOfWeek.Friday).HsDeTrabajo = 6;
+
+            Calendario cal = null;
             var fechaLunes = new DateTime(2013, 7, 1);
             var fechaViernes = new DateTime(2013, 7, 5);
 
             // Act            
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Sunday, 0));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Saturday, 0));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Monday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Tuesday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Wednesday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Thursday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Friday, 6));
+            cal = new Calendario(dias);
 
             // Assert
             Assert.AreEqual(8, cal.HsDeTrabajo(fechaLunes));
@@ -148,60 +170,63 @@ namespace CalendarioKata
         public void NoSeCarganFeriadosEntoncesNingunaFechaEsFeriado()
         {
             // Arrange
-            var cal = new Calendario();
-            var fecha1 = new DateTime(2006, 3, 24);
-            var fecha2 = new DateTime(2013, 12, 25);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = null;
+            var fecha1 = new DateTime(2006, 3, 24); // Domingo
+            var fecha2 = new DateTime(2013, 12, 25); // Lunes - Navidad
 
             // Act            
-
+            cal = new Calendario(dias);
 
             // Assert
             Assert.IsFalse(cal.EsDiaFeriado(fecha1));
-            Assert.IsFalse(cal.EsDiaFeriado(fecha1));
+            Assert.IsFalse(cal.EsDiaFeriado(fecha2));
         }
 
         [Test]
         public void SeCargaFeriadoEsaFechaEsFeriado()
         {
             // Arrange
-            var cal = new Calendario();
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
             var fecha = new DateTime(2013, 12, 25);
 
             // Act            
-            cal.Feriados.Add(new DiaFeriado(fecha.Day, fecha.Month));
+            cal.Feriados.Add(new DiaFeriadoAnual(fecha.Day, fecha.Month));
 
             // Assert
             Assert.IsTrue(cal.EsDiaFeriado(fecha));
         }
 
         [Test]
-        public void SeCargaFeriadoConFechaInicioEntoncesEsaFechaEsFeriado()
+        public void SeCargaFeriadoConAñoInicioEntoncesEsaFechaEsFeriado()
         {
             // Arrange
-            var cal = new Calendario();
-            var fechaInicio = new DateTime(2006, 1, 1);
-            var fechaFeriado = new DateTime(2006, 3, 24);            
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
+            var añoInicio = 2006;
+            var fechaFeriado = new DateTime(2006, 3, 24); // Domingo
 
             // Act            
-            cal.Feriados.Add(new DiaFeriado(fechaFeriado.Day, fechaFeriado.Month) { FechaInicio= fechaInicio });
+            cal.Feriados.Add(new DiaFeriadoAnualConAñoInicio(fechaFeriado.Day, fechaFeriado.Month, añoInicio));
 
             // Assert
-            Assert.IsTrue(cal.EsDiaFeriado(fechaFeriado));            
+            Assert.IsTrue(cal.EsDiaFeriado(fechaFeriado));
         }
 
         [Test]
-        public void SeCargaFeriadoConFechaInicioEntoncesFechasAñosPosterioresSonFeriados()
+        public void SeCargaFeriadoConAñoInicioEntoncesFechasAñosPosterioresSonFeriados()
         {
             // Arrange
-            var cal = new Calendario();
-            var fechaInicio = new DateTime(2006, 1, 1);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
+            var añoInicio = 2006;
             var fechaFeriado = new DateTime(2006, 3, 24);
-
             var fechaPosterior1 = new DateTime(2013, 3, 24);
             var fechaPosterior2 = new DateTime(2017, 3, 24);
 
             // Act            
-            cal.Feriados.Add(new DiaFeriado(fechaFeriado.Day, fechaFeriado.Month) { FechaInicio = fechaInicio });
+            cal.Feriados.Add(new DiaFeriadoAnualConAñoInicio(fechaFeriado.Day, fechaFeriado.Month, añoInicio));
 
             // Assert
             Assert.IsTrue(cal.EsDiaFeriado(fechaPosterior1));
@@ -209,37 +234,37 @@ namespace CalendarioKata
         }
 
         [Test]
-        public void SeCargaFeriadoConFechaInicioEntoncesFechasAñosAnterioresNoSonFeriados()
+        public void SeCargaFeriadoConAñoInicioEntoncesFechasAñosAnterioresNoSonFeriados()
         {
             // Arrange
-            var cal = new Calendario();
-            var fechaInicio = new DateTime(2006, 1, 1);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
+            var añoInicio = 2006;
             var fechaFeriado = new DateTime(2006, 3, 24);
             var fechaAnterior1 = new DateTime(2005, 3, 24);
             var fechaAnterior2 = new DateTime(2000, 3, 24);
 
             // Act            
-            cal.Feriados.Add(new DiaFeriado(fechaFeriado.Day, fechaFeriado.Month) { FechaInicio = fechaInicio });
+            cal.Feriados.Add(new DiaFeriadoAnualConAñoInicio(fechaFeriado.Day, fechaFeriado.Month, añoInicio));
 
             // Assert
             Assert.IsFalse(cal.EsDiaFeriado(fechaAnterior1));
             Assert.IsFalse(cal.EsDiaFeriado(fechaAnterior2));
         }
 
-        //
         [Test]
-        public void SeCargaFeriadoConFechaFinEntoncesFechasAñosIgualesOAnterioresSonFeriados()
+        public void SeCargaFeriadoConAñoFinEntoncesFechasAñosIgualesOAnterioresSonFeriados()
         {
             // Arrange
-            var cal = new Calendario();
-            var fechaFin = new DateTime(2014, 12, 31);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
+            var añoFin = 2014;
             var fechaFeriado = new DateTime(2014, 5, 1);
-
             var fechaAnterior1 = new DateTime(2009, 5, 1);
             var fechaAnterior2 = new DateTime(2014, 5, 1);
 
             // Act            
-            cal.Feriados.Add(new DiaFeriado(fechaFeriado.Day, fechaFeriado.Month) { FechaFin = fechaFin });
+            cal.Feriados.Add(new DiaFeriadoAnualConAñoFin(fechaFeriado.Day, fechaFeriado.Month, añoFin));
 
             // Assert
             Assert.IsTrue(cal.EsDiaFeriado(fechaAnterior1));
@@ -247,17 +272,18 @@ namespace CalendarioKata
         }
 
         [Test]
-        public void SeCargaFeriadoConFechaFinEntoncesFechasAñosPosterioresNoSonFeriados()
+        public void SeCargaFeriadoConAñoFinEntoncesFechasAñosPosterioresNoSonFeriados()
         {
             // Arrange
-            var cal = new Calendario();
-            var fechaFin = new DateTime(2006, 1, 1);
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
+            var añoFin = 2006;
             var fechaFeriado = new DateTime(2006, 3, 24);
             var fechaPosterior1 = new DateTime(2015, 3, 24);
             var fechaPosterior2 = new DateTime(2020, 3, 24);
 
             // Act            
-            cal.Feriados.Add(new DiaFeriado(fechaFeriado.Day, fechaFeriado.Month) { FechaFin = fechaFin });
+            cal.Feriados.Add(new DiaFeriadoAnualConAñoFin(fechaFeriado.Day, fechaFeriado.Month, añoFin));
 
             // Assert
             Assert.IsFalse(cal.EsDiaFeriado(fechaPosterior1));
@@ -268,26 +294,35 @@ namespace CalendarioKata
         public void SeCargaFeriadoEntoncesEsaFechaSeTrabaja0Hs()
         {
             // Arrange
-            var cal = new Calendario();
+            var dias = GenerarDiasLunesAViernes8hs();
+            Calendario cal = new Calendario(dias);
             var fechaFeriado = new DateTime(2016, 11, 1); // Martes
 
             // Act         
-            CargarDiasLunesAViernes8hs(cal);   
-            cal.Feriados.Add(new DiaFeriado(fechaFeriado.Day, fechaFeriado.Month));
+            cal.Feriados.Add(new DiaFeriadoAnual(fechaFeriado.Day, fechaFeriado.Month));
 
             // Assert
             Assert.AreEqual(0, cal.HsDeTrabajo(fechaFeriado));
         }
 
-        private void CargarDiasLunesAViernes8hs(Calendario cal)
+        #endregion
+
+        #region Metodos Auxiliares
+
+        private IList<DiaInfo> GenerarDiasLunesAViernes8hs()
         {
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Sunday, 0));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Saturday, 0));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Monday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Tuesday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Wednesday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Thursday, 8));
-            cal.CargarDia(new DiaInfo((int)DayOfWeek.Friday, 8));            
+            return new List<DiaInfo>()
+            {
+                new DiaInfo((int)DayOfWeek.Sunday, 0),
+                new DiaInfo((int)DayOfWeek.Saturday, 0),
+                new DiaInfo((int)DayOfWeek.Monday, 8),
+                new DiaInfo((int)DayOfWeek.Tuesday, 8),
+                new DiaInfo((int)DayOfWeek.Wednesday, 8),
+                new DiaInfo((int)DayOfWeek.Thursday, 8),
+                new DiaInfo((int)DayOfWeek.Friday, 8)
+            };                      
         }
+
+        #endregion
     }
 }
