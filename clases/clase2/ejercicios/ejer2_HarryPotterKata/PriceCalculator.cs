@@ -11,38 +11,39 @@ namespace ejer2_HarryPotterKata
         public float CalculatePrice(IEnumerable<Book> books)
         {
             float totalPrice = 0;
-            var localBooks = books.OrderBy(x => x.Title).ToList();
+            // Creamos una copia de la lista pero ordenada por titulo
+            var orderedBooks = books.OrderBy(x => x.Title).ToList();
             bool doContinue = true;
 
             while (doContinue)
             {
                 // SumPrice va a recorrer y calcular el precio para los libros distintos
-                // cada vez que lo llamemos hasta que no haya libros por procesar en localBooks
-                totalPrice += SumPrice(localBooks);
-                if (!localBooks.Any(x=> x != null))
+                // cada vez que lo llamemos hasta que ya no haya libros por procesar en orderedBooks
+                totalPrice += SumPrice(orderedBooks);
+                if (!orderedBooks.Any(x=> x != null))
                 {
                     doContinue = false;
                 }
             }
             
-            return (float) Math.Round((decimal)totalPrice, 1);
+            return totalPrice;
         }
 
-        private float SumPrice(IList<Book> localBooks)
+        private float SumPrice(IList<Book> orderedBooks)
         {            
             string previousTitle = string.Empty;
             int differentBooks = 0;
             float total = 0;
 
-            for (int i = 0; i < localBooks.Count; i++)
+            for (int i = 0; i < orderedBooks.Count; i++)
             {
-                if (localBooks[i] != null && localBooks[i].Title != previousTitle)
+                if (orderedBooks[i] != null && orderedBooks[i].Title != previousTitle)
                 {
                     differentBooks++;
-                    previousTitle = localBooks[i].Title;
-                    total += localBooks[i].Price;
+                    previousTitle = orderedBooks[i].Title;
+                    total += orderedBooks[i].Price;
                     // Seteamos en null porque este libro ya fue contabilizado
-                    localBooks[i] = null;
+                    orderedBooks[i] = null;
                 }
             }
 
@@ -75,7 +76,7 @@ namespace ejer2_HarryPotterKata
                     break;
                 case 7:
                     discount = 0.45F;
-                    break;
+                    break;                
             }
 
             return discount;

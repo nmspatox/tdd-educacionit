@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ejer1_StringDictionary
+namespace ejer1_StringDictionaryKata
 {
     [TestFixture]
     public class Tests

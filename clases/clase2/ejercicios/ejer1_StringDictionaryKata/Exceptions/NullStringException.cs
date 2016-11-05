@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace ejer1_StringDictionary
+namespace ejer1_StringDictionaryKata
 {
     [Serializable]
     internal class NullStringException : Exception

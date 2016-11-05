@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ejer1_StringDictionary
+namespace ejer1_StringDictionaryKata
 {
     public class StringDictionary
     {        

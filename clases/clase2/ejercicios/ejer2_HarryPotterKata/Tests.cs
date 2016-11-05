@@ -23,8 +23,8 @@ namespace ejer2_HarryPotterKata
             float expectedPrice = pricePerBook * 2;
 
             // Act
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 1"));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
             float totalPrice = calc.CalculatePrice(cart.Books);
 
             // Assert
@@ -41,10 +41,10 @@ namespace ejer2_HarryPotterKata
             float expectedPrice = (pricePerBook * 2 * (1 - discount)) + pricePerBook * 2;
 
             // Act
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 2"));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 2", pricePerBook));
             float totalPrice = calc.CalculatePrice(cart.Books);
 
             // Assert
@@ -83,9 +83,9 @@ namespace ejer2_HarryPotterKata
             float expectedPrice = pricePerBook * 3 * (1 - discount);
 
             // Act
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 2"));
-            cart.AddBook(new Book("Libro 3"));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 2", pricePerBook));
+            cart.AddBook(new Book("Libro 3", pricePerBook));
             float totalPrice = calc.CalculatePrice(cart.Books);
 
             // Assert
@@ -102,10 +102,10 @@ namespace ejer2_HarryPotterKata
             float expectedPrice = pricePerBook * 4 * (1- discount);
 
             // Act
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 2"));
-            cart.AddBook(new Book("Libro 3"));
-            cart.AddBook(new Book("Libro 4"));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 2", pricePerBook));
+            cart.AddBook(new Book("Libro 3", pricePerBook));
+            cart.AddBook(new Book("Libro 4", pricePerBook));
             float totalPrice = calc.CalculatePrice(cart.Books);
 
             // Assert
@@ -118,13 +118,13 @@ namespace ejer2_HarryPotterKata
 
         private void CargarColeccionCompleta(ShoppingCart cart)
         {
-            cart.AddBook(new Book("Libro 1"));
-            cart.AddBook(new Book("Libro 2"));
-            cart.AddBook(new Book("Libro 3"));
-            cart.AddBook(new Book("Libro 4"));
-            cart.AddBook(new Book("Libro 5"));
-            cart.AddBook(new Book("Libro 6"));
-            cart.AddBook(new Book("Libro 7"));
+            cart.AddBook(new Book("Libro 1", pricePerBook));
+            cart.AddBook(new Book("Libro 2", pricePerBook));
+            cart.AddBook(new Book("Libro 3", pricePerBook));
+            cart.AddBook(new Book("Libro 4", pricePerBook));
+            cart.AddBook(new Book("Libro 5", pricePerBook));
+            cart.AddBook(new Book("Libro 6", pricePerBook));
+            cart.AddBook(new Book("Libro 7", pricePerBook));
         }
 
         #endregion
