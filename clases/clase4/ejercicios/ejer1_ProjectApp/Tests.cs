@@ -10,6 +10,7 @@ namespace ejer1_ProjectApp
     [TestFixture]
     public class Test
     {
+        // v1.0
         [Test]
         public void TieneNombreVacio()
         {
@@ -67,7 +68,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaEsperadaInicio() {
+        public void TieneFechaEsperadaInicio()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -81,7 +83,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaEsperadaFin() {
+        public void TieneFechaEsperadaFin()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -95,7 +98,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void NoTieneFechaEsperadaInicioYTieneFechaEsperadaFin() {
+        public void NoTieneFechaEsperadaInicioYTieneFechaEsperadaFin()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -111,13 +115,14 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void NoTieneFechaEsperadaFinYTieneFechaEsperadaInicio() {
+        public void NoTieneFechaEsperadaFinYTieneFechaEsperadaInicio()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
             DateTime? fechaInicio = DateTime.Now;
             DateTime? fechaFin = null;
-            
+
             // Act
             unProyecto.FechaEsperadaInicio = fechaInicio;
 
@@ -127,7 +132,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaEsperadaFinIncorrectaLanzaExcepcion() {
+        public void TieneFechaEsperadaFinIncorrectaLanzaExcepcion()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -136,14 +142,15 @@ namespace ejer1_ProjectApp
 
             // Act
             unProyecto.FechaEsperadaInicio = hoy;
-            Exception ex = Assert.Catch(()=> unProyecto.FechaEsperadaFin = ayer);
+            Exception ex = Assert.Catch(() => unProyecto.FechaEsperadaFin = ayer);
 
             // Assert
             Assert.IsAssignableFrom<FechaFinNoValidaException>(ex);
         }
 
         [Test]
-        public void TieneFechaEsperadaInicioIncorrectaLanzaExcepcion() {
+        public void TieneFechaEsperadaInicioIncorrectaLanzaExcepcion()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -159,7 +166,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaRealInicio() {
+        public void TieneFechaRealInicio()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -173,7 +181,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaRealFin() {
+        public void TieneFechaRealFin()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -187,7 +196,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void NoTieneFechaRealInicioYTieneFechaRealFin() {
+        public void NoTieneFechaRealInicioYTieneFechaRealFin()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -203,7 +213,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void NoTieneFechaRealFinYTieneFechaRealInicio() {
+        public void NoTieneFechaRealFinYTieneFechaRealInicio()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -219,7 +230,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaRealFinIncorrectaLanzaExcepcion() {
+        public void TieneFechaRealFinIncorrectaLanzaExcepcion()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -235,7 +247,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void TieneFechaRealInicioIncorrectaLanzaExcepcion() {
+        public void TieneFechaRealInicioIncorrectaLanzaExcepcion()
+        {
             // Arrange            
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -250,13 +263,10 @@ namespace ejer1_ProjectApp
             Assert.IsAssignableFrom<FechaInicioNoValidaException>(ex);
         }
 
-
-
-        // 1.1
-
+        // v1.1
         [Test]
-        public void ProyectoNuevoSinTareas() {
-
+        public void ProyectoNuevoSinTareas()
+        {
             // Arrange
             Calendario unCalendario = new Calendario();
 
@@ -264,13 +274,12 @@ namespace ejer1_ProjectApp
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
 
             // Assert
-            Assert.AreEqual(0,unProyecto.Tareas.Count());
-
+            Assert.AreEqual(0, unProyecto.Tareas.Count());
         }
 
         [Test]
-        public void SeAgregaUnaTareaSeTieneUnaTarea() {
-
+        public void SeAgregaUnaTareaSeTieneUnaTarea()
+        {
             // Arrange
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -281,7 +290,6 @@ namespace ejer1_ProjectApp
 
             // Assert
             Assert.AreEqual(1, unProyecto.Tareas.Count());
-
         }
 
         [Test]
@@ -298,11 +306,11 @@ namespace ejer1_ProjectApp
 
             // Assert
             Assert.AreEqual(0, unProyecto.Tareas.Count());
-
         }
 
         [Test]
-        public void SePuedeQuitarUnaTareaQueNoFueAgregada() {
+        public void SePuedeQuitarUnaTareaQueNoFueAgregada()
+        {
             // Arrange
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -316,8 +324,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void SePuedeEliminarTodasLasTareas() {
-
+        public void SePuedeEliminarTodasLasTareas()
+        {
             // Arrange
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -336,8 +344,8 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void LasTareasAgregadasSonLasMismas() {
-
+        public void LasTareasAgregadasSonLasMismas()
+        {
             // Arrange
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
@@ -347,24 +355,23 @@ namespace ejer1_ProjectApp
             // Act 
             unProyecto.AgregarTarea(unaTarea);
             unProyecto.AgregarTarea(otraTarea);
-            
+
             // Assert
             Assert.AreEqual(unaTarea, unProyecto.Tareas.ElementAt(0));
             Assert.AreEqual(otraTarea, unProyecto.Tareas.ElementAt(1));
         }
 
         [Test]
-        public void NoSePuedeAgregarUnaTareaExistente() {
-
+        public void NoSePuedeAgregarUnaTareaExistente()
+        {
             // Arrange
             Calendario unCalendario = new Calendario();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
             Tarea unaTarea = new Tarea();
             Tarea otraTarea = new Tarea();
-            
+
             // Act 
             unProyecto.AgregarTarea(unaTarea);
-
             Exception ex = Assert.Catch(() => unProyecto.AgregarTarea(unaTarea));
 
             // Assert

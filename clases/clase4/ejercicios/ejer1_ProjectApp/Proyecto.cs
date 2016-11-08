@@ -8,25 +8,21 @@ namespace ejer1_ProjectApp
 {
     public class Proyecto
     {
+        #region Fields y Properties
 
-        private List<Tarea> _tareas; 
         public string Nombre { get; set; }
 
-        public IEnumerable<Tarea> Tareas
-        {
-            get { return _tareas; }
-        }
-
-
-
-
         private DateTime? _fechaEsperadaInicio;
-        public DateTime? FechaEsperadaInicio {
-            get {
+        public DateTime? FechaEsperadaInicio
+        {
+            get
+            {
                 return _fechaEsperadaInicio;
             }
-            set {
-                if (value.HasValue && FechaEsperadaFin.HasValue && value > FechaEsperadaFin) {
+            set
+            {
+                if (value.HasValue && FechaEsperadaFin.HasValue && value > FechaEsperadaFin)
+                {
                     throw new FechaInicioNoValidaException();
                 }
 
@@ -35,13 +31,16 @@ namespace ejer1_ProjectApp
         }
 
         private DateTime? _fechaEsperadaFin;
-        public DateTime? FechaEsperadaFin {
-            get{
+        public DateTime? FechaEsperadaFin
+        {
+            get
+            {
                 return _fechaEsperadaFin;
             }
             set
             {
-                if (value.HasValue && FechaEsperadaInicio.HasValue && value < FechaEsperadaInicio) {
+                if (value.HasValue && FechaEsperadaInicio.HasValue && value < FechaEsperadaInicio)
+                {
                     throw new FechaFinNoValidaException();
                 }
 
@@ -58,7 +57,8 @@ namespace ejer1_ProjectApp
             }
             set
             {
-                if (value.HasValue && FechaRealFin.HasValue && value > FechaRealFin) {
+                if (value.HasValue && FechaRealFin.HasValue && value > FechaRealFin)
+                {
                     throw new FechaInicioNoValidaException();
                 }
 
@@ -75,13 +75,24 @@ namespace ejer1_ProjectApp
             }
             set
             {
-                if (value.HasValue && FechaRealInicio.HasValue && value < FechaRealInicio) {
+                if (value.HasValue && FechaRealInicio.HasValue && value < FechaRealInicio)
+                {
                     throw new FechaFinNoValidaException();
                 }
 
                 _fechaRealFin = value;
             }
         }
+
+        private List<Tarea> _tareas;
+        public IEnumerable<Tarea> Tareas
+        {
+            get { return _tareas; }
+        }
+
+        #endregion
+
+        #region Constructor
 
         public Proyecto(string nombre, Calendario calendario)
         {
@@ -99,24 +110,33 @@ namespace ejer1_ProjectApp
             _tareas = new List<Tarea>();
         }
 
-        public void AgregarTarea (Tarea unaTarea)
+        #endregion
+
+        #region Métodos Públicos
+
+        public void AgregarTarea(Tarea unaTarea)
         {
-            if (_tareas.Contains(unaTarea)) {
+            if (_tareas.Contains(unaTarea))
+            {
                 throw new NoSePuedeAgregarUnaTareaExistenteException();
             }
             _tareas.Add(unaTarea);
         }
 
-        public void QuitarTarea (Tarea unaTarea) {
-
-            if (!_tareas.Contains(unaTarea)) {
+        public void QuitarTarea(Tarea unaTarea)
+        {
+            if (!_tareas.Contains(unaTarea))
+            {
                 throw new NoSePuedeQuitarUnaTareaNoExistenteException();
             }
             _tareas.Remove(unaTarea);
         }
 
-        public void EliminarTodasLasTareas() {
+        public void EliminarTodasLasTareas()
+        {
             _tareas.Clear();
         }
+
+        #endregion
     }
 }
