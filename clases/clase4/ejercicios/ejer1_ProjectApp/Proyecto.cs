@@ -8,7 +8,17 @@ namespace ejer1_ProjectApp
 {
     public class Proyecto
     {
+
+        private List<Tarea> _tareas; 
         public string Nombre { get; set; }
+
+        public IEnumerable<Tarea> Tareas
+        {
+            get { return _tareas; }
+        }
+
+
+
 
         private DateTime? _fechaEsperadaInicio;
         public DateTime? FechaEsperadaInicio {
@@ -86,6 +96,27 @@ namespace ejer1_ProjectApp
             }
 
             Nombre = nombre;
+            _tareas = new List<Tarea>();
+        }
+
+        public void AgregarTarea (Tarea unaTarea)
+        {
+            if (_tareas.Contains(unaTarea)) {
+                throw new NoSePuedeAgregarUnaTareaExistenteException();
+            }
+            _tareas.Add(unaTarea);
+        }
+
+        public void QuitarTarea (Tarea unaTarea) {
+
+            if (!_tareas.Contains(unaTarea)) {
+                throw new NoSePuedeQuitarUnaTareaNoExistenteException();
+            }
+            _tareas.Remove(unaTarea);
+        }
+
+        public void EliminarTodasLasTareas() {
+            _tareas.Clear();
         }
     }
 }

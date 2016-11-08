@@ -56,8 +56,11 @@
     <Compile Include="Excepciones\NombreVacioException.cs" />
     <Compile Include="Excepciones\FechaFinNoValidaException.cs" />
     <Compile Include="Excepciones\FechaInicioNoValidaException.cs" />
+    <Compile Include="Excepciones\NoSePuedeQuitarUnaTareaNoExistenteException.cs" />
+    <Compile Include="Excepciones\NoSePuedeAgregarUnaTareaExistenteException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proyecto.cs" />
+    <Compile Include="Tarea.cs" />
     <Compile Include="Tests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -117,7 +117,7 @@ namespace ejer1_ProjectApp
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
             DateTime? fechaInicio = DateTime.Now;
             DateTime? fechaFin = null;
-
+            
             // Act
             unProyecto.FechaEsperadaInicio = fechaInicio;
 
@@ -250,6 +250,131 @@ namespace ejer1_ProjectApp
             Assert.IsAssignableFrom<FechaInicioNoValidaException>(ex);
         }
 
+
+
+        // 1.1
+
+        [Test]
+        public void ProyectoNuevoSinTareas() {
+
+            // Arrange
+            Calendario unCalendario = new Calendario();
+
+            // Act   
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+
+            // Assert
+            Assert.AreEqual(0,unProyecto.Tareas.Count());
+
+        }
+
+        [Test]
+        public void SeAgregaUnaTareaSeTieneUnaTarea() {
+
+            // Arrange
+            Calendario unCalendario = new Calendario();
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+            Tarea unaTarea = new Tarea();
+
+            // Act   
+            unProyecto.AgregarTarea(unaTarea);
+
+            // Assert
+            Assert.AreEqual(1, unProyecto.Tareas.Count());
+
+        }
+
+        [Test]
+        public void SePuedeAgregarYSeLaPuedeQuitar()
+        {
+            // Arrange
+            Calendario unCalendario = new Calendario();
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+            Tarea unaTarea = new Tarea();
+
+            // Act   
+            unProyecto.AgregarTarea(unaTarea);
+            unProyecto.QuitarTarea(unaTarea);
+
+            // Assert
+            Assert.AreEqual(0, unProyecto.Tareas.Count());
+
+        }
+
+        [Test]
+        public void SePuedeQuitarUnaTareaQueNoFueAgregada() {
+            // Arrange
+            Calendario unCalendario = new Calendario();
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+            Tarea unaTarea = new Tarea();
+
+            // Act   
+            Exception ex = Assert.Catch(() => unProyecto.QuitarTarea(unaTarea));
+
+            // Assert
+            Assert.IsAssignableFrom<NoSePuedeQuitarUnaTareaNoExistenteException>(ex);
+        }
+
+        [Test]
+        public void SePuedeEliminarTodasLasTareas() {
+
+            // Arrange
+            Calendario unCalendario = new Calendario();
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+            Tarea unaTarea = new Tarea();
+            Tarea otraTarea = new Tarea();
+            Tarea unaTareaMala = new Tarea();
+
+            // Act 
+            unProyecto.AgregarTarea(unaTarea);
+            unProyecto.AgregarTarea(otraTarea);
+            unProyecto.AgregarTarea(unaTareaMala);
+            unProyecto.EliminarTodasLasTareas();
+
+            // Assert
+            Assert.AreEqual(0, unProyecto.Tareas.Count());
+        }
+
+        [Test]
+        public void LasTareasAgregadasSonLasMismas() {
+
+            // Arrange
+            Calendario unCalendario = new Calendario();
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+            Tarea unaTarea = new Tarea();
+            Tarea otraTarea = new Tarea();
+
+            // Act 
+            unProyecto.AgregarTarea(unaTarea);
+            unProyecto.AgregarTarea(otraTarea);
+            
+            // Assert
+            Assert.AreEqual(unaTarea, unProyecto.Tareas.ElementAt(0));
+            Assert.AreEqual(otraTarea, unProyecto.Tareas.ElementAt(1));
+        }
+
+        [Test]
+        public void NoSePuedeAgregarUnaTareaExistente() {
+
+            // Arrange
+            Calendario unCalendario = new Calendario();
+            Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
+            Tarea unaTarea = new Tarea();
+            Tarea otraTarea = new Tarea();
+            
+            // Act 
+            unProyecto.AgregarTarea(unaTarea);
+
+            Exception ex = Assert.Catch(() => unProyecto.AgregarTarea(unaTarea));
+
+            // Assert
+            Assert.IsAssignableFrom<NoSePuedeAgregarUnaTareaExistenteException>(ex);
+        }
+
+
+        // 1.2
+
+        // COMING SOON
 
     }
 }
