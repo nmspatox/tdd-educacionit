@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace ejer1_ProjectApp
 {
     [TestFixture]
-    public class Test
+    public class Test_v1
     {
         #region Tests
 
@@ -90,10 +90,10 @@ namespace ejer1_ProjectApp
             DateTime? fechaInicio = DateTime.Now;
 
             // Act            
-            unProyecto.FechaEsperadaInicio = fechaInicio;
+            unProyecto.FechaInicioEsperada = fechaInicio;
 
             // Assert
-            Assert.AreEqual(fechaInicio, unProyecto.FechaEsperadaInicio);
+            Assert.AreEqual(fechaInicio, unProyecto.FechaInicioEsperada);
         }
 
         [Test]
@@ -105,10 +105,10 @@ namespace ejer1_ProjectApp
             DateTime? fechaFin = DateTime.Now.AddDays(1);
 
             // Act            
-            unProyecto.FechaEsperadaFin = fechaFin;
+            unProyecto.FechaFinEsperada = fechaFin;
 
             // Assert
-            Assert.AreEqual(fechaFin, unProyecto.FechaEsperadaFin);
+            Assert.AreEqual(fechaFin, unProyecto.FechaFinEsperada);
         }
 
         [Test]
@@ -121,11 +121,11 @@ namespace ejer1_ProjectApp
             DateTime? fechaFin = DateTime.Now.AddDays(1);
 
             // Act
-            unProyecto.FechaEsperadaFin = fechaFin;
+            unProyecto.FechaFinEsperada = fechaFin;
 
             // Assert
-            Assert.AreEqual(fechaInicio, unProyecto.FechaEsperadaInicio);
-            Assert.AreEqual(fechaFin, unProyecto.FechaEsperadaFin);
+            Assert.AreEqual(fechaInicio, unProyecto.FechaInicioEsperada);
+            Assert.AreEqual(fechaFin, unProyecto.FechaFinEsperada);
         }
 
         [Test]
@@ -138,11 +138,11 @@ namespace ejer1_ProjectApp
             DateTime? fechaFin = null;
 
             // Act
-            unProyecto.FechaEsperadaInicio = fechaInicio;
+            unProyecto.FechaInicioEsperada = fechaInicio;
 
             // Assert
-            Assert.AreEqual(fechaInicio, unProyecto.FechaEsperadaInicio);
-            Assert.AreEqual(fechaFin, unProyecto.FechaEsperadaFin);
+            Assert.AreEqual(fechaInicio, unProyecto.FechaInicioEsperada);
+            Assert.AreEqual(fechaFin, unProyecto.FechaFinEsperada);
         }
 
         [Test]
@@ -155,8 +155,8 @@ namespace ejer1_ProjectApp
             DateTime? ayer = hoy.Value.AddDays(-1);
 
             // Act
-            unProyecto.FechaEsperadaInicio = hoy;
-            Exception ex = Assert.Catch(() => unProyecto.FechaEsperadaFin = ayer);
+            unProyecto.FechaInicioEsperada = hoy;
+            Exception ex = Assert.Catch(() => unProyecto.FechaFinEsperada = ayer);
 
             // Assert
             Assert.IsAssignableFrom<FechaFinNoValidaException>(ex);
@@ -172,8 +172,8 @@ namespace ejer1_ProjectApp
             DateTime? ayer = hoy.Value.AddDays(-1);
 
             // Act            
-            unProyecto.FechaEsperadaFin = ayer;
-            Exception ex = Assert.Catch(() => unProyecto.FechaEsperadaInicio = hoy);
+            unProyecto.FechaFinEsperada = ayer;
+            Exception ex = Assert.Catch(() => unProyecto.FechaInicioEsperada = hoy);
 
             // Assert
             Assert.IsAssignableFrom<FechaInicioNoValidaException>(ex);
@@ -188,10 +188,10 @@ namespace ejer1_ProjectApp
             DateTime? fechaInicio = DateTime.Now;
 
             // Act            
-            unProyecto.FechaRealInicio = fechaInicio;
+            unProyecto.FechaInicioReal = fechaInicio;
 
             // Assert
-            Assert.AreEqual(fechaInicio, unProyecto.FechaRealInicio);
+            Assert.AreEqual(fechaInicio, unProyecto.FechaInicioReal);
         }
 
         [Test]
@@ -203,10 +203,10 @@ namespace ejer1_ProjectApp
             DateTime? fechaFin = DateTime.Now;
 
             // Act            
-            unProyecto.FechaRealFin = fechaFin;
+            unProyecto.FechaFinReal = fechaFin;
 
             // Assert
-            Assert.AreEqual(fechaFin, unProyecto.FechaRealFin);
+            Assert.AreEqual(fechaFin, unProyecto.FechaFinReal);
         }
 
         [Test]
@@ -219,11 +219,11 @@ namespace ejer1_ProjectApp
             DateTime? fechaFin = DateTime.Now.AddDays(1);
 
             // Act
-            unProyecto.FechaRealFin = fechaFin;
+            unProyecto.FechaFinReal = fechaFin;
 
             // Assert
-            Assert.AreEqual(fechaInicio, unProyecto.FechaRealInicio);
-            Assert.AreEqual(fechaFin, unProyecto.FechaRealFin);
+            Assert.AreEqual(fechaInicio, unProyecto.FechaInicioReal);
+            Assert.AreEqual(fechaFin, unProyecto.FechaFinReal);
         }
 
         [Test]
@@ -236,11 +236,11 @@ namespace ejer1_ProjectApp
             DateTime? fechaFin = null;
 
             // Act
-            unProyecto.FechaRealInicio = fechaInicio;
+            unProyecto.FechaInicioReal = fechaInicio;
 
             // Assert
-            Assert.AreEqual(fechaInicio, unProyecto.FechaRealInicio);
-            Assert.AreEqual(fechaFin, unProyecto.FechaRealFin);
+            Assert.AreEqual(fechaInicio, unProyecto.FechaInicioReal);
+            Assert.AreEqual(fechaFin, unProyecto.FechaFinReal);
         }
 
         [Test]
@@ -253,8 +253,8 @@ namespace ejer1_ProjectApp
             DateTime? ayer = hoy.Value.AddDays(-1);
 
             // Act
-            unProyecto.FechaRealInicio = hoy;
-            Exception ex = Assert.Catch(() => unProyecto.FechaRealFin = ayer);
+            unProyecto.FechaInicioReal = hoy;
+            Exception ex = Assert.Catch(() => unProyecto.FechaFinReal = ayer);
 
             // Assert
             Assert.IsAssignableFrom<FechaFinNoValidaException>(ex);
@@ -270,8 +270,8 @@ namespace ejer1_ProjectApp
             DateTime? ayer = hoy.Value.AddDays(-1);
 
             // Act            
-            unProyecto.FechaRealFin = ayer;
-            Exception ex = Assert.Catch(() => unProyecto.FechaRealInicio = hoy);
+            unProyecto.FechaFinReal = ayer;
+            Exception ex = Assert.Catch(() => unProyecto.FechaInicioReal = hoy);
 
             // Assert
             Assert.IsAssignableFrom<FechaInicioNoValidaException>(ex);
@@ -297,7 +297,7 @@ namespace ejer1_ProjectApp
             // Arrange
             Calendario unCalendario = GetCalendarioDefault();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            Tarea unaTarea = new Tarea();
+            Tarea unaTarea = new Tarea("tarea");
 
             // Act   
             unProyecto.AgregarTarea(unaTarea);
@@ -312,7 +312,7 @@ namespace ejer1_ProjectApp
             // Arrange
             Calendario unCalendario = GetCalendarioDefault();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            Tarea unaTarea = new Tarea();
+            Tarea unaTarea = new Tarea("tarea");
 
             // Act   
             unProyecto.AgregarTarea(unaTarea);
@@ -323,12 +323,12 @@ namespace ejer1_ProjectApp
         }
 
         [Test]
-        public void SePuedeQuitarUnaTareaQueNoFueAgregada()
+        public void NoSePuedeQuitarUnaTareaQueNoFueAgregada()
         {
             // Arrange
             Calendario unCalendario = GetCalendarioDefault();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            Tarea unaTarea = new Tarea();
+            Tarea unaTarea = new Tarea("tarea");
 
             // Act   
             Exception ex = Assert.Catch(() => unProyecto.QuitarTarea(unaTarea));
@@ -343,9 +343,9 @@ namespace ejer1_ProjectApp
             // Arrange
             Calendario unCalendario = GetCalendarioDefault();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            Tarea unaTarea = new Tarea();
-            Tarea otraTarea = new Tarea();
-            Tarea unaTareaMala = new Tarea();
+            Tarea unaTarea = new Tarea("tarea");
+            Tarea otraTarea = new Tarea("tarea");
+            Tarea unaTareaMala = new Tarea("tarea");
 
             // Act 
             unProyecto.AgregarTarea(unaTarea);
@@ -363,8 +363,8 @@ namespace ejer1_ProjectApp
             // Arrange
             Calendario unCalendario = GetCalendarioDefault();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            Tarea unaTarea = new Tarea();
-            Tarea otraTarea = new Tarea();
+            Tarea unaTarea = new Tarea("tarea");
+            Tarea otraTarea = new Tarea("tarea");
 
             // Act 
             unProyecto.AgregarTarea(unaTarea);
@@ -381,8 +381,7 @@ namespace ejer1_ProjectApp
             // Arrange
             Calendario unCalendario = GetCalendarioDefault();
             Proyecto unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            Tarea unaTarea = new Tarea();
-            Tarea otraTarea = new Tarea();
+            Tarea unaTarea = new Tarea("tarea");
 
             // Act 
             unProyecto.AgregarTarea(unaTarea);
@@ -519,8 +518,8 @@ namespace ejer1_ProjectApp
             // Act 
             var unCalendario = new Calendario(diasNoLaborables, duracionJornada);
             var unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            unProyecto.FechaRealInicio = fechaInicio;
-            unProyecto.FechaRealFin = fechaFin;
+            unProyecto.FechaInicioReal = fechaInicio;
+            unProyecto.FechaFinReal = fechaFin;
 
             // Assert
             Assert.AreEqual(duracionProyectoEsperada, unProyecto.Duracion);
@@ -539,8 +538,8 @@ namespace ejer1_ProjectApp
             // Act 
             var unCalendario = new Calendario(diasNoLaborables, duracionJornada);
             var unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            unProyecto.FechaRealInicio = fechaInicio;
-            unProyecto.FechaRealFin = fechaFin;
+            unProyecto.FechaInicioReal = fechaInicio;
+            unProyecto.FechaFinReal = fechaFin;
 
             // Assert
             Assert.AreEqual(duracionProyectoEsperada, unProyecto.Duracion);
@@ -562,8 +561,8 @@ namespace ejer1_ProjectApp
             unCalendario.AgregarFeriado(feriado);
 
             var unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            unProyecto.FechaRealInicio = fechaInicio;
-            unProyecto.FechaRealFin = fechaFin;
+            unProyecto.FechaInicioReal = fechaInicio;
+            unProyecto.FechaFinReal = fechaFin;
 
             // Assert
             Assert.AreEqual(duracionProyectoEsperada, unProyecto.Duracion);
@@ -583,8 +582,8 @@ namespace ejer1_ProjectApp
             var unCalendario = new Calendario(diasNoLaborables, duracionJornada);
 
             var unProyecto = new Proyecto("PasamosUnTexto", unCalendario);
-            unProyecto.FechaRealInicio = fechaInicio;
-            unProyecto.FechaRealFin = fechaFin;
+            unProyecto.FechaInicioReal = fechaInicio;
+            unProyecto.FechaFinReal = fechaFin;
 
             // Assert
             Assert.AreEqual(duracionProyectoEsperada, unProyecto.Duracion);

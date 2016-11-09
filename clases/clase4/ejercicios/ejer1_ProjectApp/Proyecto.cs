@@ -12,62 +12,64 @@ namespace ejer1_ProjectApp
 
         public string Nombre { get; set; }
 
-        private DateTime? _fechaEsperadaInicio;
-        public DateTime? FechaEsperadaInicio
+        public Calendario Calendario { get; }
+
+        private DateTime? _fechaInicioEsperada;
+        public DateTime? FechaInicioEsperada
         {
             get
             {
-                return _fechaEsperadaInicio;
+                return _fechaInicioEsperada;
             }
             set
             {
-                if (value.HasValue && FechaEsperadaFin.HasValue && value > FechaEsperadaFin)
+                if (value.HasValue && FechaFinEsperada.HasValue && value > FechaFinEsperada)
                 {
                     throw new FechaInicioNoValidaException();
                 }
 
-                _fechaEsperadaInicio = value;
+                _fechaInicioEsperada = value;
             }
         }
 
-        private DateTime? _fechaEsperadaFin;
-        public DateTime? FechaEsperadaFin
+        private DateTime? _fechaFinEsperada;
+        public DateTime? FechaFinEsperada
         {
             get
             {
-                return _fechaEsperadaFin;
+                return _fechaFinEsperada;
             }
             set
             {
-                if (value.HasValue && FechaEsperadaInicio.HasValue && value < FechaEsperadaInicio)
+                if (value.HasValue && FechaInicioEsperada.HasValue && value < FechaInicioEsperada)
                 {
                     throw new FechaFinNoValidaException();
                 }
 
-                _fechaEsperadaFin = value;
+                _fechaFinEsperada = value;
             }
         }
 
-        private DateTime? _fechaRealInicio;
-        public DateTime? FechaRealInicio
+        private DateTime? _fechaInicioReal;
+        public DateTime? FechaInicioReal
         {
             get
             {
-                return _fechaRealInicio;
+                return _fechaInicioReal;
             }
             set
             {
-                if (value.HasValue && FechaRealFin.HasValue && value > FechaRealFin)
+                if (value.HasValue && FechaFinReal.HasValue && value > FechaFinReal)
                 {
                     throw new FechaInicioNoValidaException();
                 }
 
-                _fechaRealInicio = value;
+                _fechaInicioReal = value;
             }
         }
 
         private DateTime? _fechaRealFin;
-        public DateTime? FechaRealFin
+        public DateTime? FechaFinReal
         {
             get
             {
@@ -75,7 +77,7 @@ namespace ejer1_ProjectApp
             }
             set
             {
-                if (value.HasValue && FechaRealInicio.HasValue && value < FechaRealInicio)
+                if (value.HasValue && FechaInicioReal.HasValue && value < FechaInicioReal)
                 {
                     throw new FechaFinNoValidaException();
                 }
@@ -89,6 +91,37 @@ namespace ejer1_ProjectApp
         {
             get { return _tareas; }
         }
+
+        private List<Persona> _personas;
+        public IEnumerable<Persona> Personas
+        {
+            get
+            {
+                return _personas;
+            }
+        }
+
+        public int Duracion {
+            get
+            {
+                int totalHs = 0;
+                if (FechaInicioReal.HasValue && FechaFinReal.HasValue)
+                {
+                    int cantDias = FechaFinReal.Value.Subtract(FechaInicioReal.Value).Days + 1;
+                    for (int i = 0; i < cantDias; i++)
+                    {
+                        var fecha = FechaInicioReal.Value.AddDays(i);
+                        totalHs += Calendario.EsFeriado(fecha) 
+                            ? 0 
+                            : Calendario.EsLaboral(fecha) 
+                                ? Calendario.HsJornada
+                                : 0;
+                    }
+                }
+
+                return totalHs;
+            }
+        }        
 
         #endregion
 
@@ -105,9 +138,12 @@ namespace ejer1_ProjectApp
             {
                 throw new CalendarioVacioException();
             }
+            
+            _tareas = new List<Tarea>();
+            _personas = new List<Persona>();
 
             Nombre = nombre;
-            _tareas = new List<Tarea>();
+            Calendario = calendario;
         }
 
         #endregion
@@ -121,6 +157,21 @@ namespace ejer1_ProjectApp
                 throw new NoSePuedeAgregarUnaTareaExistenteException();
             }
             _tareas.Add(unaTarea);
+
+            ActualizarFechasEsperadas();
+            ActualizarFechasReales();
+        }
+
+        private void ActualizarFechasReales()
+        {
+            FechaInicioReal = _tareas.Min(x => x.FechaInicioReal);
+            FechaFinReal = _tareas.Max(x => x.FechaFinReal);
+        }
+
+        private void ActualizarFechasEsperadas()
+        {
+            FechaInicioEsperada = _tareas.Min(x => x.FechaInicioEsperada);
+            FechaFinEsperada = _tareas.Max(x => x.FechaFinEsperada);
         }
 
         public void QuitarTarea(Tarea unaTarea)
@@ -135,6 +186,31 @@ namespace ejer1_ProjectApp
         public void EliminarTodasLasTareas()
         {
             _tareas.Clear();
+        }
+
+        public void AgregarPersona(Persona unaPersona)
+        {
+            if (_personas.Contains(unaPersona))
+            {
+                throw new NoSePuedeAgregarUnaPersonaExistenteException();
+            }
+
+            _personas.Add(unaPersona);
+        }
+
+        public void QuitarPersona(Persona unaPersona)
+        {
+            if (!_personas.Contains(unaPersona))
+            {
+                throw new NoSePuedeQuitarUnaPersonaNoExistenteException();
+            }
+
+            _personas.Remove(unaPersona);
+        }
+
+        public void EliminarTodasLasPersonas()
+        {
+            _personas.Clear();
         }
 
         #endregion
